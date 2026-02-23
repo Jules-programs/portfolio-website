@@ -1,5 +1,5 @@
 import Introduction from "./components/Layout/introductoryParagraph";
-import Background from "./background/background";
+import SVGwaves from "./background/SVGwaves";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
 
       <Introduction />
 
-      <Background />
+      <SVGwaves />
 
     </div>
   );
