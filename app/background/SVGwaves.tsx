@@ -47,70 +47,18 @@ Like a mirror effect
 
   const layerTenCode = "M0,0 L24,21.3 C48,43,96,85,144,133.3 C192,181,240,235,288,234.7 C336,235,384,181,432,154.7 C480,128,528,128,576,112 C624,96,672,64,720,42.7 C768,21,816,11,864,21.3 C912,32,960,64,1008,117.3 C1056,171,1104,245,1152,234.7 C1200,224,1248,128,1296,85.3 C1344,43,1392,53,1416,58.7 L1440,64 L1440,320 L1416,320 C1392,320,1344,320,1296,320 C1248,320,1200,320,1152,320 C1104,320,1056,320,1008,320 C960,320,912,320,864,320 C816,320,768,320,720,320 C672,320,624,320,576,320 C528,320,480,320,432,320 C384,320,336,320,288,320 C240,320,192,320,144,320 C96,320,48,320,24,320 L0,320 Z"
 
-  // Layer 1
-  const L1_Y = 0
-  const L1_MIRROR_Y = 639
-
-  // Layer 2
-  const L2_Y = 150
-  const L2_MIRROR_Y = 790
-
-  // Layer 3
-  const L3_Y = 300
-  const L3_MIRROR_Y = 939
-
-  // Layer 4
-  const L4_Y = 470
-  const L4_MIRROR_Y = 1430
-
-  // Layer 5
-  const L5_Y = 1110
-  const L5_MIRROR_Y = 1750
-
-  // Layer 6
-  const L6_Y = 1430
-  const L6_MIRROR_Y = 2070
-
-  // Layer 7
-  const L7_Y = 1750
-  const L7_MIRROR_Y = 2390
-
-  // Layer 8
-  const L8_Y = 2070
-  const L8_MIRROR_Y = 2710
-
-  // Layer 9
-  const L9_Y = 2390
-  const L9_MIRROR_Y = 3030
-
-  // Layer 10
-  const L10_Y = 2710
-
-  // LAYER CONFIG - Easy to adjust speeds and positions
-  const layerConfig = [
-    { color: layerOneColor, code: layerOneCode, yOffset: 0, speed: 0.1 },
-    { color: layerTwoColor, code: layerTwoCode, yOffset: 150, speed: 0.15 },
-    { color: layerThreeColor, code: layerThreeCode, yOffset: 470, speed: 0.2 },
-    { color: layerFourColor, code: layerFourCode, yOffset: 790, speed: 0.25 },
-    { color: layerFiveColor, code: layerFiveCode, yOffset: 1110, speed: 0.3 },
-    { color: layerSixColor, code: layerSixCode, yOffset: 1430, speed: 0.35 },
-    { color: layerSevenColor, code: layerSevenCode, yOffset: 1750, speed: 0.4 },
-    { color: layerEightColor, code: layerEightCode, yOffset: 2070, speed: 0.45 },
-    { color: layerNineColor, code: layerNineCode, yOffset: 2390, speed: 0.5 },
-    { color: layerTenColor, code: layerTenCode, yOffset: 2710, speed: 0.55 },
-  ]
-
-  const layers = [
-  { y: 0, mirrorY: 639, color: layerOneColor, code: layerOneCode },
-  { y: 150, mirrorY: 790, color: layerTwoColor, code: layerTwoCode },
-  { y: 300, mirrorY: 939, color: layerThreeColor, code: layerThreeCode },
-  { y: 470, mirrorY: 1430, color: layerFourColor, code: layerFourCode },
-  { y: 1110, mirrorY: 1750, color: layerFiveColor, code: layerFiveCode },
-  { y: 1430, mirrorY: 2070, color: layerSixColor, code: layerSixCode },
-  { y: 1750, mirrorY: 2390, color: layerSevenColor, code: layerSevenCode },
-  { y: 2070, mirrorY: 2710, color: layerEightColor, code: layerEightCode },
-  { y: 2390, mirrorY: 3030, color: layerNineColor, code: layerNineCode },
-  { y: 2710, mirrorY: null, color: layerTenColor, code: layerTenCode },
+  // LAYER POSITIONS - Each path is 320px tall, so mirror = normal + 320
+  const LAYERS = [
+    { y: 0, color: layerOneColor, code: layerOneCode },
+    { y: 150, color: layerTwoColor, code: layerTwoCode },
+    { y: 470, color: layerThreeColor, code: layerThreeCode },
+    { y: 790, color: layerFourColor, code: layerFourCode },
+    { y: 1110, color: layerFiveColor, code: layerFiveCode },
+    { y: 1430, color: layerSixColor, code: layerSixCode },
+    { y: 1750, color: layerSevenColor, code: layerSevenCode },
+    { y: 2070, color: layerEightColor, code: layerEightCode },
+    { y: 2390, color: layerNineColor, code: layerNineCode },
+    { y: 2710, color: layerTenColor, code: layerTenCode },
   ]
 
   const svgRef = useRef<SVGSVGElement>(null)
@@ -121,9 +69,14 @@ Like a mirror effect
       setScrollY(window.scrollY)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Helper to calculate yOffset with parallax
+  const getY = (baseY: number, speed: number = 0.05) => {
+    return baseY + scrollY * speed
+  }
 
   return (
     <div className="w-full overflow-hidden">
@@ -137,7 +90,7 @@ Like a mirror effect
         <g transform="translate(0, 0">
           <path fill={layerOneColor} fillOpacity="1" d={layerOneCode} />
         </g>
-        <g transform="translate(0, 639) scale(1, -1)">
+        <g transform="translate(0, 640) scale(1, -1)">
           <path fill={layerOneColor} fillOpacity="1" d={layerOneCode} />
         </g>
 
@@ -191,22 +144,22 @@ Like a mirror effect
 
         {/* Layer 8 - Normal + Mirrored */}
         <g transform="translate(0, 950)">
-          <path fill={layerEightColor} fillOpacity="1" d={layerEightCode} />
+          <path fill={layerEightColor} fillOpacity=".65" d={layerEightCode} />
         </g>
-        <g transform="translate(0, 1550) scale(1, -1)">
-          <path fill={layerEightColor} fillOpacity="1" d={layerEightCode} />
+        <g transform="translate(0, 1589.7) scale(1, -1)">
+          <path fill={layerEightColor} fillOpacity=".65" d={layerEightCode} />
         </g>
 
         {/* Layer 9 - Normal + Mirrored */}
         <g transform="translate(0, 1165)">
           <path fill={layerNineColor} fillOpacity="1" d={layerNineCode} />
         </g>
-        <g transform="translate(0, 3045) scale(1, -1)">
+        <g transform="translate(0, 1800) scale(1, -1)">
           <path fill={layerNineColor} fillOpacity="1" d={layerNineCode} />
         </g>
 
         {/* Layer 10 - Normal + Mirrored */}
-        <g transform="translate(0, 1230)">
+        <g transform="translate(0, 1450)">
           <path fill={layerTenColor} fillOpacity="1" d={layerTenCode} />
         </g>
       </svg>
