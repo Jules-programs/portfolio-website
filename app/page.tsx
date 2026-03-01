@@ -1,8 +1,8 @@
 import Introduction from "./components/Layout/introductoryParagraph";
 import SVGwaves from "./background/SVGwaves";
-import ProjectContainer from "./components/projectContainer";
-import TechStackSection from "./components/techStack";
-import ProjectsSection from "./components/projectSection";
+import ProjectContainer from "./components/sections/projectContainer";
+import TechStackSection from "./components/sections/techStack";
+import ProjectsSection from "./components/sections/projectSection";
 
 export default function Home() {
   return (

@@ -1,0 +1,10 @@
+Colors:
+    Python: #3973a5 + #ffd040
+    TypeScript: #2e79c7
+    React: #087da3
+    Node.js: #458d41
+    Next.js: #000000
+    Java: #f89917
+    JavaSript: #f7df1d
+    Dart: #36bcf9
+    C#: #7b0c79
