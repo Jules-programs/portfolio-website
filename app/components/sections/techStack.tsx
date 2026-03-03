@@ -20,6 +20,7 @@ export default function TechStackSection() {
           <TechLabel name="React" color="bg-[#087da3]" />
           <TechLabel name="TypeScript" color="bg-[#2e79c7]" />
           <TechLabel name="Dart" color="bg-[#36bcf9]" />
+          <TechLabel name="Tailwind" color="bg-sky-400" />
           <TechLabel name="C#" color="bg-[#7b0c79]" />
           <TechLabel name="Next.js" color="bg-black" />
 
