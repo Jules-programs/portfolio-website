@@ -14,7 +14,7 @@ const NightSky: React.FC = () => {
     });
 
   return (
-    <div className="stars-wrapper absolute inset-0 -z-10 pointer-events-none">
+    <div className="stars-wrapper absolute top-0 left-0 w-full h-[2000px] -z-10 pointer-events-none">
       {/* Twinkle layers */}
       {Array.from({ length: layers }).map((_, layerIndex) => (
         <svg
