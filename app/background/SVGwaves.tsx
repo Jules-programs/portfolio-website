@@ -22,10 +22,14 @@ const layerFourColor = "#1b4f63"
 const layerFiveColor = "#2a8f92"  // shallow water
 const layerSixColor = "#5bb3b0"
 const layerSevenColor = "#9fded7" // shoreline foam glow
-const layerEightColor = "#e6d5b8" // wet sand
-const layerNineColor = "#f2e2c9"  // dry sand
-const layerTenColor = "#faf3e6"
-const layerElevenColor = "#f5d59b"
+const layerEightColor = "#d8c3a5"   // deep wet sand (cool + darker)
+const layerNineColor = "#e2ccb0"    // wet sand
+const layerTenColor = "#ecd6bb"     // drying sand
+const layerElevenColor = "#f3e0c6"  // soft transition
+const layerTwelveColor = "#f7e7cf"  // dry sand
+const layerThirteenColor = "#faedd9" // sunlit dry
+const layerFourteenColor = "#fdf3e4" // bright dry sand
+const layerFifteenColor = "#fff8ec"  // almost white highlight
 
   // PATH CODES
   const layerOneCode = "M0,64 L21.8,96 C43.6,128,87,192,131,197.3 C174.5,203,218,149,262,112 C305.5,75,349,53,393,80 C436.4,107,480,181,524,176 C567.3,171,611,85,655,80 C698.2,75,742,149,785,176 C829.1,203,873,181,916,160 C960,139,1004,117,1047,106.7 C1090.9,96,1135,96,1178,106.7 C1221.8,117,1265,139,1309,160 C1352.7,181,1396,203,1418,213.3 L1440,224 L1440,320 L1418.2,320 C1396.4,320,1353,320,1309,320 C1265.5,320,1222,320,1178,320 C1134.5,320,1091,320,1047,320 C1003.6,320,960,320,916,320 C872.7,320,829,320,785,320 C741.8,320,698,320,655,320 C610.9,320,567,320,524,320 C480,320,436,320,393,320 C349.1,320,305,320,262,320 C218.2,320,175,320,131,320 C87.3,320,44,320,22,320 L0,320 Z"
@@ -148,6 +152,22 @@ const layerElevenColor = "#f5d59b"
 
       <g transform={`translate(0, ${getY(1425 + Y)})`}>
         <path fill={layerElevenColor} fillOpacity="1" d={layerTenCode} />
+      </g>
+
+      <g transform={`translate(0, ${getY(1500 + Y)})`}>
+        <path fill={layerTwelveColor} fillOpacity="1" d={layerTenCode} />
+      </g>
+
+      <g transform={`translate(0, ${getY(1575 + Y)})`}>
+        <path fill={layerThirteenColor} fillOpacity="1" d={layerTenCode} />
+      </g>
+
+      <g transform={`translate(0, ${getY(1650 + Y)})`}>
+        <path fill={layerFourteenColor} fillOpacity="1" d={layerTenCode} />
+      </g>
+
+      <g transform={`translate(0, ${getY(1700 + Y)})`}>
+        <path fill={layerFifteenColor} fillOpacity="1" d={layerTenCode} />
       </g>
     </svg>
   </div>

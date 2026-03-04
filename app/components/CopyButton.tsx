@@ -19,7 +19,7 @@ const CopyButton: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='flex justify-center font-bold text-center text-gray-600 mb-6'>
       <button onClick={copyTextToClipboard}>
         {isCopied ? 'Copied!' : 'Copy Email'}
       </button>

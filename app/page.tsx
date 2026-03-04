@@ -3,6 +3,7 @@ import NightSky from "./background/nightSky";
 import SVGwaves from "./background/SVGwaves";
 import TechStackSection from "./components/sections/techStack";
 import ProjectsSection from "./components/sections/projectSection";
+import Contact from "./components/sections/Contact";
 
 export default function Home() {
   return (
@@ -14,9 +15,13 @@ export default function Home() {
 
       < SVGwaves />
 
+      < Introduction />
+
       < ProjectsSection />
 
       < TechStackSection />
+
+      < Contact />
 
     </div>
   );

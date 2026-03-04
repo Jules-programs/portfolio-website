@@ -2,7 +2,7 @@ import React from "react";
 
 const NightSky: React.FC = () => {
   const layers = 4;
-  const starsPerLayer = 200;
+  const starsPerLayer = 100;
 
   const generateStars = () =>
     Array.from({ length: starsPerLayer }).map((_, i) => {
@@ -15,7 +15,6 @@ const NightSky: React.FC = () => {
 
   return (
     <div className="stars-wrapper absolute top-0 left-0 w-full h-[2000px] -z-10 pointer-events-none">
-      {/* Twinkle layers */}
       {Array.from({ length: layers }).map((_, layerIndex) => (
         <svg
           key={layerIndex}
@@ -26,7 +25,6 @@ const NightSky: React.FC = () => {
         </svg>
       ))}
 
-      {/* Comets */}
       <svg className="extras absolute inset-0 w-full h-full" preserveAspectRatio="none">
         <defs>
           <radialGradient id="comet-gradient" cx="0" cy=".5" r="0.5">
