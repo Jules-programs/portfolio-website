@@ -59,7 +59,7 @@ const layerFifteenColor = "#fff8ec"  // almost white highlight
   const getY = (baseY: number, speed: number = 0.1) => {
     return baseY + scrollY * speed
   }
-  const Y = 900
+  const Y = 425
   const mirrorFlip = 638;
 
   return (
@@ -67,7 +67,7 @@ const layerFifteenColor = "#fff8ec"  // almost white highlight
     <svg
       ref={svgRef}
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 3200"
+      viewBox="0 0 1440 2700"
       className="w-full h-auto"
     >
       {/* Layer 1 - Normal + Mirrored */}

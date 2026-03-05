@@ -2,11 +2,12 @@ import ProjectContainer from "./projectContainer"
 import SchedulifyGIF from "../../../public/SchedulifyGIF.gif"
 import Image from "next/image"
 import TypeRacerPNG from "../../../public/TypeRacerPNG.png"
+import MusicDepotGIF from "../../../public/MusicDepotGIF.gif"
 
 export default function ProjectsSection() {
 
   return (
-    <section className=" py-20">
+    <section className="py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-center">
           <h2 className="text-4xl font-bold text-center mb-16 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-gray-200">
@@ -14,11 +15,11 @@ export default function ProjectsSection() {
           </h2>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-25">
 
           <ProjectContainer
             title="Schedulify - Demo"
-            description="A scheduling platform for instructors and clients."
+            description="A scheduling platform for instructors and clients. Using AI to help with the complexity of Calendar Apps."
             source={false}
             image={<Image unoptimized src={SchedulifyGIF} alt="Schedulify Demo" />}
             techStack={[
@@ -30,11 +31,25 @@ export default function ProjectsSection() {
           />
 
           <ProjectContainer
+            title="Music Depot Database"
+            description='Database Development Project. Creating a Databse using Supabase'
+            source={true}
+            sourceLink="https://github.com/Jules-programs/Your-Music-Depot-Project"
+            image={<Image unoptimized src={MusicDepotGIF} alt="MusicDepot"/>}
+            techStack={[
+              { name: "TypeScript", color: "bg-[#2e79c7]" },
+              { name: "React", color: "bg-[#087da3]" },
+              { name: "Python", color: "bg-[#ffd040]", textColor: "text-black"},
+              { name: "Next.js", color: "bg-black" }
+            ]}
+          />
+
+          <ProjectContainer
             title="Type Racer"
-            description="Personal developer portfolio built with modern tools."
+            description="A Mobile Application created in Andriod Studio using Flutter. This is just as it seems, Type as fast as you can. WIN!"
             source={true}
             sourceLink="https://github.com/Jules-programs/Type-Racer"
-            image={<Image src={TypeRacerPNG} alt="Type Racer"/>}
+            image={<Image unoptimized src={TypeRacerPNG} alt="Type Racer"/>}
             techStack={[
               { name: "Dart", color: "bg-[#36bcf9]" },
             ]}

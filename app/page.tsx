@@ -9,7 +9,7 @@ export default function Home() {
   return (
     
     <div className="">
-      <h1 className="flex justify-center text-4xl text-white font-bold text-center">Welcome</h1>
+      <h1 className="p-20 flex justify-center text-8xl text-white font-bold text-center">Welcome</h1>
 
       < NightSky />
 
