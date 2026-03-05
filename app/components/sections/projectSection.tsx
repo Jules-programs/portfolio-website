@@ -19,7 +19,7 @@ export default function ProjectsSection() {
 
           <ProjectContainer
             title="Schedulify - Demo"
-            description="A scheduling platform for instructors and clients. Using AI to help with the complexity of Calendar Apps."
+            description="Schedulify is an AI‑powered scheduling platform designed to greatly reduce the time spent Scheduling. Created with simplicity and user in mind"
             source={false}
             image={<Image unoptimized src={SchedulifyGIF} alt="Schedulify Demo" />}
             techStack={[
@@ -32,7 +32,7 @@ export default function ProjectsSection() {
 
           <ProjectContainer
             title="Music Depot Database"
-            description='Database Development Project. Creating a Databse using Supabase'
+            description='Collaborative development of a real‑world scheduling system for small business use cases. Implemented CRUD operations, triggers, and business logic to support real‑time scheduling.'
             source={true}
             sourceLink="https://github.com/Jules-programs/Your-Music-Depot-Project"
             image={<Image unoptimized src={MusicDepotGIF} alt="MusicDepot"/>}
