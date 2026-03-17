@@ -9,7 +9,7 @@ type Tech = {
 
 type ProjectContainerProps = {
   title: string
-  description: string
+  description: React.ReactNode
   source?: boolean // Open/Closed Sourced ? button!
   sourceLink?: string // Optional link for source code
   image?: React.ReactNode

@@ -19,11 +19,12 @@ export default function NavBar() {
     <nav
       className="
         sticky top-0 z-50 w-full
-        bg-white/10 backdrop-blur-md
+        bg-white/35 backdrop-blur-lg
         border-b border-white/20
         shadow-lg
       "
     >
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16">
 
         {/* Logo / Brand */}
