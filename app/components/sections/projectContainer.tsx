@@ -76,20 +76,21 @@ export default function ProjectContainer({
       )}
 
       {image && (
-        <div className="mb-4 sm:mb-6 rounded-xl overflow-hidden min-w-0">
+        <div className="mb-6 sm:mb-6 rounded-xl overflow-hidden min-w-0">
           {typeof image === 'string' ? (
             <img
               src={image}
               alt={title}
-              className="rounded-xl w-full object-cover h-40 sm:h-48 max-h-48"
+              className="rounded-xl w-full object-cover h-72 sm:h-80 max-h-80"
             />
           ) : (
-            <div className="[&_img]:rounded-xl [&_img]:w-full [&_img]:object-contain [&_img]:max-h-48 [&_img]:min-w-0">
+            <div className="[&_img]:rounded-xl [&_img]:w-full [&_img]:object-contain [&_img]:max-h-80 [&_img]:min-w-0">
               {image}
             </div>
           )}
         </div>
       )}
+
 
       <div className="flex flex-wrap gap-3">
         {techStack.map((tech, index) => (
