@@ -62,15 +62,29 @@ export default function ProjectsSection() {
           />
 
           <ProjectContainer
-            title="Type Racer"
-            description="A Mobile Application created in Andriod Studio using Flutter. This is just as it seems, Type as fast as you can. WIN! Big insperation from the https://play.typeracer.com/"
+            title="Type Racer - Mobile Development"
+            description={
+              <>
+                A Mobile Application created in Android Studio using Flutter. This is just as it seems—type as fast as you can. WIN! Big inspiration from{" "}
+                <a
+                  href="https://play.typeracer.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  https://play.typeracer.com/
+                </a>
+                .
+              </>
+            }
             source={true}
             sourceLink="https://github.com/Jules-programs/Type-Racer"
-            image={<Image unoptimized src={TypeRacerPNG} alt="Type Racer"/>}
+            image={<Image unoptimized src={TypeRacerPNG} alt="Type Racer" />}
             techStack={[
               { name: "Dart", color: "bg-[#36bcf9]" },
             ]}
           />
+
 
         </div>
 
