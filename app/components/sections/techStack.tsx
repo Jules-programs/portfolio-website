@@ -2,16 +2,16 @@ import TechLabel from "./techLabel"
 
 export default function TechStackSection() {
   return (
-    <section className="py-20">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+    <section id="tech-stack" className="py-10 sm:py-16 md:py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
 
         <div className="flex justify-center">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-gray-200">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 md:mb-16 bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-lg border border-gray-200">
             Tech Stack
           </h2>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
 
           <TechLabel name="JavaScript" color="bg-[#f7df1d]" textColor="text-black" />
           <TechLabel name="Python" color="bg-[#ffd040]" textColor="text-black" />

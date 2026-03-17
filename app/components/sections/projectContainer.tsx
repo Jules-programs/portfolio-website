@@ -25,9 +25,9 @@ export default function ProjectContainer({
   techStack,
 }: ProjectContainerProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition opacity-80">
-      <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600 mb-6">{description}</p>
+    <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 hover:shadow-xl transition opacity-80 min-w-0">
+      <h3 className="text-xl sm:text-2xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">{description}</p>
 
       {source !== undefined && (
         <div className="mb-4">
@@ -76,15 +76,17 @@ export default function ProjectContainer({
       )}
 
       {image && (
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6 rounded-xl overflow-hidden min-w-0">
           {typeof image === 'string' ? (
             <img
               src={image}
               alt={title}
-              className="rounded-xl w-full object-cover h-48"
+              className="rounded-xl w-full object-cover h-40 sm:h-48 max-h-48"
             />
           ) : (
-            image // React element (like Next.js Image component)
+            <div className="[&_img]:rounded-xl [&_img]:w-full [&_img]:object-contain [&_img]:max-h-48 [&_img]:min-w-0">
+              {image}
+            </div>
           )}
         </div>
       )}

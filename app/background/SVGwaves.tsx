@@ -3,33 +3,23 @@
 import { useEffect, useRef, useState } from 'react'
 
 export default function SVGwaves() {
-/* 
-
-Provided are each SVG files formats. 
-
-To do this properly I'm going to need to have these upsidedown
-with them appended to each other.
-
-Like a mirror effect
-
-*/
 
   // FILL COLORS (Darkest to light)
-const layerOneColor = "#07141f"   // deep ocean
-const layerTwoColor = "#0b1d2a"
-const layerThreeColor = "#12344a"
-const layerFourColor = "#1b4f63"
-const layerFiveColor = "#2a8f92"  // shallow water
-const layerSixColor = "#5bb3b0"
-const layerSevenColor = "#9fded7" // shoreline foam glow
-const layerEightColor = "#d8c3a5"   // deep wet sand (cool + darker)
-const layerNineColor = "#e2ccb0"    // wet sand
-const layerTenColor = "#ecd6bb"     // drying sand
-const layerElevenColor = "#f3e0c6"  // soft transition
-const layerTwelveColor = "#f7e7cf"  // dry sand
-const layerThirteenColor = "#faedd9" // sunlit dry
-const layerFourteenColor = "#fdf3e4" // bright dry sand
-const layerFifteenColor = "#fff8ec"  // almost white highlight
+  const layerOneColor = "#07141f"
+  const layerTwoColor = "#0b1d2a"
+  const layerThreeColor = "#12344a"
+  const layerFourColor = "#1b4f63"
+  const layerFiveColor = "#2a8f92"
+  const layerSixColor = "#5bb3b0"
+  const layerSevenColor = "#9fded7"
+  const layerEightColor = "#d8c3a5"
+  const layerNineColor = "#e2ccb0"
+  const layerTenColor = "#ecd6bb"
+  const layerElevenColor = "#f3e0c6"
+  const layerTwelveColor = "#f7e7cf"
+  const layerThirteenColor = "#faedd9"
+  const layerFourteenColor = "#fdf3e4"
+  const layerFifteenColor = "#fff8ec"
 
   // PATH CODES
   const layerOneCode = "M0,64 L21.8,96 C43.6,128,87,192,131,197.3 C174.5,203,218,149,262,112 C305.5,75,349,53,393,80 C436.4,107,480,181,524,176 C567.3,171,611,85,655,80 C698.2,75,742,149,785,176 C829.1,203,873,181,916,160 C960,139,1004,117,1047,106.7 C1090.9,96,1135,96,1178,106.7 C1221.8,117,1265,139,1309,160 C1352.7,181,1396,203,1418,213.3 L1440,224 L1440,320 L1418.2,320 C1396.4,320,1353,320,1309,320 C1265.5,320,1222,320,1178,320 C1134.5,320,1091,320,1047,320 C1003.6,320,960,320,916,320 C872.7,320,829,320,785,320 C741.8,320,698,320,655,320 C610.9,320,567,320,524,320 C480,320,436,320,393,320 C349.1,320,305,320,262,320 C218.2,320,175,320,131,320 C87.3,320,44,320,22,320 L0,320 Z"
@@ -45,131 +35,140 @@ const layerFifteenColor = "#fff8ec"  // almost white highlight
 
   const svgRef = useRef<SVGSVGElement>(null)
   const [scrollY, setScrollY] = useState(0)
+  const [viewportWidth, setViewportWidth] = useState(1440)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
+    const updateWidth = () => setViewportWidth(window.innerWidth)
+    updateWidth()
+    window.addEventListener('resize', updateWidth, { passive: true })
+    return () => window.removeEventListener('resize', updateWidth)
+  }, [])
 
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Helper to calculate yOffset with parallax
+  const widthScale = viewportWidth / 1440
   const getY = (baseY: number, speed: number = 0.1) => {
-    return baseY + scrollY * speed
+    return baseY + scrollY * speed * widthScale
   }
+
   const Y = 425
-  const mirrorFlip = 638;
+  const mirrorFlip = 638
 
   return (
-  <div className="absolute inset-0 -z-10 pointer-events-none">
-    <svg
-      ref={svgRef}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 2700"
-      className="w-full h-auto"
-    >
-      {/* Layer 1 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(0 + Y)})`}>
-        <path fill={layerOneColor} fillOpacity="1" d={layerOneCode} />
-      </g>
-      <g transform={`translate(0, ${getY(0 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerOneColor} fillOpacity="1" d={layerOneCode} />
-      </g>
+    /*
+      absolute inset-0: fills the full `relative` page wrapper vertically and horizontally.
+      -z-10: sits above night sky (-z-20) but below all content sections (z-0 and above).
+      pointer-events-none so it never blocks clicks on sections above it.
+    */
+    <div className="absolute inset-0 -z-10 w-full h-full overflow-hidden pointer-events-none">
+      <svg
+        ref={svgRef}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 2700"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {/* Layer 1 - Normal + Mirrored */}
+        <g transform={`translate(0, ${getY(0 + Y)})`}>
+          <path fill={layerOneColor} fillOpacity="1" d={layerOneCode} />
+        </g>
+        <g transform={`translate(0, ${getY(0 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerOneColor} fillOpacity="1" d={layerOneCode} />
+        </g>
 
-      {/* Layer 2 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(150 + Y)})`}>
-        <path fill={layerTwoColor} fillOpacity="1" d={layerTwoCode} />
-      </g>
-      <g transform={`translate(0, ${getY(150 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerTwoColor} fillOpacity="1" d={layerTwoCode} />
-      </g>
+        {/* Layer 2 */}
+        <g transform={`translate(0, ${getY(150 + Y)})`}>
+          <path fill={layerTwoColor} fillOpacity="1" d={layerTwoCode} />
+        </g>
+        <g transform={`translate(0, ${getY(150 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerTwoColor} fillOpacity="1" d={layerTwoCode} />
+        </g>
 
-      {/* Layer 3 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(300 + Y)})`}>
-        <path fill={layerThreeColor} fillOpacity="1" d={layerThreeCode} />
-      </g>
-      <g transform={`translate(0, ${getY(300 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerThreeColor} fillOpacity="1" d={layerThreeCode} />
-      </g>
+        {/* Layer 3 */}
+        <g transform={`translate(0, ${getY(300 + Y)})`}>
+          <path fill={layerThreeColor} fillOpacity="1" d={layerThreeCode} />
+        </g>
+        <g transform={`translate(0, ${getY(300 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerThreeColor} fillOpacity="1" d={layerThreeCode} />
+        </g>
 
-      {/* Layer 4 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(465 + Y)})`}>
-        <path fill={layerFourColor} fillOpacity="1" d={layerFourCode} />
-      </g>
-      <g transform={`translate(0, ${getY(465 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerFourColor} fillOpacity="1" d={layerFourCode} />
-      </g>
+        {/* Layer 4 */}
+        <g transform={`translate(0, ${getY(465 + Y)})`}>
+          <path fill={layerFourColor} fillOpacity="1" d={layerFourCode} />
+        </g>
+        <g transform={`translate(0, ${getY(465 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerFourColor} fillOpacity="1" d={layerFourCode} />
+        </g>
 
-      {/* Layer 5 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(685 + Y)})`}>
-        <path fill={layerFiveColor} fillOpacity="1" d={layerFiveCode} />
-      </g>
-      <g transform={`translate(0, ${getY(685 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerFiveColor} fillOpacity="1" d={layerFiveCode} />
-      </g>
+        {/* Layer 5 */}
+        <g transform={`translate(0, ${getY(685 + Y)})`}>
+          <path fill={layerFiveColor} fillOpacity="1" d={layerFiveCode} />
+        </g>
+        <g transform={`translate(0, ${getY(685 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerFiveColor} fillOpacity="1" d={layerFiveCode} />
+        </g>
 
-      {/* Layer 6 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(875 + Y)})`}>
-        <path fill={layerSixColor} fillOpacity="1" d={layerSixCode} />
-      </g>
-      <g transform={`translate(0, ${getY(875 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerSixColor} fillOpacity="1" d={layerSixCode} />
-      </g>
+        {/* Layer 6 */}
+        <g transform={`translate(0, ${getY(875 + Y)})`}>
+          <path fill={layerSixColor} fillOpacity="1" d={layerSixCode} />
+        </g>
+        <g transform={`translate(0, ${getY(875 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerSixColor} fillOpacity="1" d={layerSixCode} />
+        </g>
 
-      {/* Layer 7 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(1020 + Y)})`}>
-        <path fill={layerSevenColor} fillOpacity="1" d={layerSevenCode} />
-      </g>
-      <g transform={`translate(0, ${getY(1020 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerSevenColor} fillOpacity="1" d={layerSevenCode} />
-      </g>
+        {/* Layer 7 */}
+        <g transform={`translate(0, ${getY(1020 + Y)})`}>
+          <path fill={layerSevenColor} fillOpacity="1" d={layerSevenCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1020 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerSevenColor} fillOpacity="1" d={layerSevenCode} />
+        </g>
 
-      {/* Layer 8 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(1100 + Y)})`}>
-        <path fill={layerEightColor} fillOpacity="1" d={layerEightCode} />
-      </g>
-      <g transform={`translate(0, ${getY(1100 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerEightColor} fillOpacity="1" d={layerEightCode} />
-      </g>
+        {/* Layer 8 */}
+        <g transform={`translate(0, ${getY(1100 + Y)})`}>
+          <path fill={layerEightColor} fillOpacity="1" d={layerEightCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1100 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerEightColor} fillOpacity="1" d={layerEightCode} />
+        </g>
 
-      {/* Layer 9 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(1225 + Y)})`}>
-        <path fill={layerNineColor} fillOpacity="1" d={layerNineCode} />
-      </g>
-      <g transform={`translate(0, ${getY(1225 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerNineColor} fillOpacity="1" d={layerNineCode} />
-      </g>
+        {/* Layer 9 */}
+        <g transform={`translate(0, ${getY(1225 + Y)})`}>
+          <path fill={layerNineColor} fillOpacity="1" d={layerNineCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1225 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerNineColor} fillOpacity="1" d={layerNineCode} />
+        </g>
 
-      {/* Layer 10 - Normal + Mirrored */}
-      <g transform={`translate(0, ${getY(1350 + Y)})`}>
-        <path fill={layerTenColor} fillOpacity="1" d={layerTenCode} />
-      </g>
-      <g transform={`translate(0, ${getY(1350 + Y + mirrorFlip)}) scale(1, -1)`}>
-        <path fill={layerTenColor} fillOpacity="1" d={layerTenCode} />
-      </g>
+        {/* Layer 10 */}
+        <g transform={`translate(0, ${getY(1350 + Y)})`}>
+          <path fill={layerTenColor} fillOpacity="1" d={layerTenCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1350 + Y + mirrorFlip)}) scale(1, -1)`}>
+          <path fill={layerTenColor} fillOpacity="1" d={layerTenCode} />
+        </g>
 
-      <g transform={`translate(0, ${getY(1425 + Y)})`}>
-        <path fill={layerElevenColor} fillOpacity="1" d={layerTenCode} />
-      </g>
-
-      <g transform={`translate(0, ${getY(1500 + Y)})`}>
-        <path fill={layerTwelveColor} fillOpacity="1" d={layerTenCode} />
-      </g>
-
-      <g transform={`translate(0, ${getY(1575 + Y)})`}>
-        <path fill={layerThirteenColor} fillOpacity="1" d={layerTenCode} />
-      </g>
-
-      <g transform={`translate(0, ${getY(1650 + Y)})`}>
-        <path fill={layerFourteenColor} fillOpacity="1" d={layerTenCode} />
-      </g>
-
-      <g transform={`translate(0, ${getY(1700 + Y)})`}>
-        <path fill={layerFifteenColor} fillOpacity="1" d={layerTenCode} />
-      </g>
-    </svg>
-  </div>
-  );
+        <g transform={`translate(0, ${getY(1425 + Y)})`}>
+          <path fill={layerElevenColor} fillOpacity="1" d={layerTenCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1500 + Y)})`}>
+          <path fill={layerTwelveColor} fillOpacity="1" d={layerTenCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1575 + Y)})`}>
+          <path fill={layerThirteenColor} fillOpacity="1" d={layerTenCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1650 + Y)})`}>
+          <path fill={layerFourteenColor} fillOpacity="1" d={layerTenCode} />
+        </g>
+        <g transform={`translate(0, ${getY(1700 + Y)})`}>
+          <path fill={layerFifteenColor} fillOpacity="1" d={layerTenCode} />
+        </g>
+      </svg>
+    </div>
+  )
 }

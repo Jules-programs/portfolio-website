@@ -14,7 +14,11 @@ const NightSky: React.FC = () => {
     });
 
   return (
-    <div className="stars-wrapper absolute top-0 left-0 w-full h-[1000px] -z-10 pointer-events-none">
+    /* 
+      absolute inset-0 fills the entire `relative` root div in page.tsx.
+      -z-20 sits behind SVGwaves (-z-10) and all content.
+    */
+    <div className="stars-wrapper absolute inset-0 w-full h-full -z-20 pointer-events-none overflow-hidden">
       {Array.from({ length: layers }).map((_, layerIndex) => (
         <svg
           key={layerIndex}

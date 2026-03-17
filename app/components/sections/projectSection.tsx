@@ -3,19 +3,20 @@ import SchedulifyGIF from "../../../public/SchedulifyGIF.gif"
 import Image from "next/image"
 import TypeRacerPNG from "../../../public/TypeRacerPNG.png"
 import MusicDepotGIF from "../../../public/MusicDepotGIF.gif"
+import DRTPredictiveGIF from "../../../public/DRT-PredictiveGIF.gif"
 
 export default function ProjectsSection() {
 
   return (
-    <section className="py-20">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="projects" className="py-10 sm:py-16 md:py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-center">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-gray-200">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 md:mb-16 bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-lg border border-gray-200">
             Projects
           </h2>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-25">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
 
           <ProjectContainer
             title="Schedulify - Demo"
@@ -30,11 +31,27 @@ export default function ProjectsSection() {
             ]}
           />
 
+
           <ProjectContainer
-            title="Music Depot Database"
+            title="Durham College 2026 Hackathon 1st Place Winners 🏆"
+            description='DRT - Prediction Model: The Maintenence system is underequipped and nonpredictive to the Durham Climate.'
+            source={true}
+            sourceLink="https://main.d3omt2q10rv48q.amplifyapp.com"
+            image={<Image unoptimized src={DRTPredictiveGIF} alt="DRTPredictiveGIF"/>}
+            techStack={[
+              { name: "TypeScript", color: "bg-[#2e79c7]" },
+              { name: "React", color: "bg-[#087da3]" },
+              { name: "Next.js", color: "bg-black" }
+            ]}
+
+
+          />
+
+          <ProjectContainer
+            title="Database - Music Depot"
             description='Collaborative development of a real‑world scheduling system for small business use cases. Implemented CRUD operations, triggers, and business logic to support real‑time scheduling.'
             source={true}
-            sourceLink="https://github.com/Jules-programs/Your-Music-Depot-Project"
+            sourceLink="https://main.d3omt2q10rv48q.amplifyapp.com"
             image={<Image unoptimized src={MusicDepotGIF} alt="MusicDepot"/>}
             techStack={[
               { name: "TypeScript", color: "bg-[#2e79c7]" },
@@ -46,7 +63,7 @@ export default function ProjectsSection() {
 
           <ProjectContainer
             title="Type Racer"
-            description="A Mobile Application created in Andriod Studio using Flutter. This is just as it seems, Type as fast as you can. WIN!"
+            description="A Mobile Application created in Andriod Studio using Flutter. This is just as it seems, Type as fast as you can. WIN! Big insperation from the https://play.typeracer.com/"
             source={true}
             sourceLink="https://github.com/Jules-programs/Type-Racer"
             image={<Image unoptimized src={TypeRacerPNG} alt="Type Racer"/>}
